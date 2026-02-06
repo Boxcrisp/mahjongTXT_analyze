@@ -50,15 +50,14 @@ def processFile():
             if re.match(r'\*\s*\d+\.', line):
                 Step.append(line.replace(".", "").replace("* ", "").strip().split(' ')) #Step list
             if("SQRWALL" in line):
-                river = line.replace("* SQRWALL ", "").split(' ')#River wall list
-                k = 0
-                for i in range(0, 64, 4):
-                    for j in range(4):
-                        Player[k].append(river[i+j])
-                    if(k == 3):
-                        k = 0
-                    else:
-                        k += 1
+                river = line.replace("* SQRWALL ", "").split(' ')
+            
+                Player[0] = river[0:17]
+                
+                for k in range(1, 4):
+                    start_index = 17 + (k - 1) * 16
+                    end_index = start_index + 16
+                    Player[k] = river[start_index:end_index]
 
 def strCard(cards):
     typeDict = {0:'花', 1:'萬', 2:'筒', 3:'條', 4:'字'}
